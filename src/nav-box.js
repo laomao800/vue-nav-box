@@ -1,38 +1,3 @@
-<template>
-  <div
-    class="nav-box__wrapper"
-    :style="{ height: internalHeight }"
-  >
-    <div ref="content" class="nav-box__content">
-      <slot />
-    </div>
-    <div
-      class="nav-box__navs"
-      :style="{ width: internalNavWidth }"
-    >
-      <ul>
-        <li
-          v-for="(nav, index) in navs"
-          :key="index"
-          :class="['nav-box__nav', {
-            'nav-box__nav-active': activeItem ? activeItem === nav : index === 0
-          }]"
-          @click="navClick(nav)"
-        >
-          <slot
-            v-if="nav.$slots.title"
-            name="title"
-          />
-          <template v-else>
-            {{ nav.title }}
-          </template>
-        </li>
-      </ul>
-    </div>
-  </div>
-</template>
-
-<script>
 /*
  * Scroll feature fork from https://github.com/eddiemf/vue-scrollactive
  */
@@ -74,7 +39,7 @@ export default {
       navs: [],
       activeItem: null,
       lastActiveItem: null,
-      triggerByScroll: false
+      scrollByNav: false
     }
   },
 
@@ -109,10 +74,10 @@ export default {
         return
       }
 
-      this.triggerByScroll = true
+      this.scrollByNav = true
       this.activeItem = nav
       await this.scrollTo(target)
-      this.triggerByScroll = false
+      this.scrollByNav = false
     },
 
     scrollTo(target) {
@@ -156,7 +121,7 @@ export default {
     },
 
     onScroll(event) {
-      if (!this.triggerByScroll) {
+      if (!this.scrollByNav) {
         this.activeItem = this.getItemInsideWindow()
         if (this.activeItem !== this.lastActiveItem) {
           this.$emit(
@@ -185,112 +150,35 @@ export default {
       })
       return activeItem
     }
+  },
+
+  render() {
+    return (
+      <div class="nav-box__wrapper" style={{ height: this.internalHeight }}>
+        <div ref="content" class="nav-box__content">
+          {this.$slots.default}
+        </div>
+        <div class="nav-box__navs" style={{ width: this.internalNavWidth }}>
+          <ul>
+            {this.navs.map((nav, index) => (
+              <li
+                key={index}
+                class={[
+                  'nav-box__nav',
+                  {
+                    'nav-box__nav--active': this.activeItem
+                      ? this.activeItem === nav
+                      : index === 0
+                  }
+                ]}
+                on-click={() => this.navClick(nav)}
+              >
+                {nav.$slots.title ? nav.$slots.title : nav.title}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    )
   }
 }
-</script>
-
-<style lang="less">
-@color-primary: #009efb;
-
-.scrollbar() {
-  &:hover::-webkit-scrollbar {
-    opacity: 1;
-  }
-
-  &::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-    background-color: rgba(0, 0, 0, 0.06);
-    -webkit-border-radius: 100px;
-    opacity: 0;
-
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.09);
-    }
-
-    &-thumb {
-      background: rgba(0, 0, 0, 0.2);
-      -webkit-border-radius: 100px;
-
-      &:active {
-        background: rgba(0, 0, 0, 0.6);
-      }
-    }
-  }
-}
-
-.nav-box {
-  &__wrapper {
-    display: flex;
-    height: 100%;
-  }
-
-  &__content {
-    position: relative;
-    flex: 1;
-    padding-right: 16px;
-    overflow: auto;
-    .scrollbar();
-  }
-
-  &__navs {
-    width: 200px;
-    padding-left: 16px;
-    overflow: auto;
-    .scrollbar();
-
-    ul {
-      height: 100%;
-      padding: 0;
-      margin: 0;
-      list-style: none;
-      border-left: 1px solid #eaeaea;
-    }
-  }
-
-  &__nav {
-    position: relative;
-    padding: 6px 0 6px 16px;
-    margin-bottom: 4px;
-    font-size: 14px;
-    line-height: 1.4;
-    color: #333;
-    cursor: pointer;
-    transition: color 0.4s;
-
-    &::before {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      box-sizing: content-box;
-      display: block;
-      width: 6px;
-      height: 6px;
-      content: '';
-      background-color: #eee;
-      border: 4px solid;
-      border-color: transparent;
-      border-radius: 50%;
-      transition: background-color 0.4s;
-      transform: translate(-50%, -50%);
-    }
-
-    &:hover {
-      color: @color-primary;
-
-      &::before {
-        background-color: #ddd;
-      }
-    }
-
-    &-active {
-      color: @color-primary;
-
-      &::before {
-        background-color: #fff !important;
-        border-color: @color-primary;
-      }
-    }
-  }
-}
-</style>

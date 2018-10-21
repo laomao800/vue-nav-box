@@ -1,6 +1,7 @@
 import Vue from 'vue'
-import NavBox from './nav-box.vue'
-import NavBoxPane from './nav-box-pane.vue'
+import NavBox from './nav-box'
+import NavBoxPane from './nav-box-pane'
+import './nav-box.less'
 
 NavBox.install = function() {
   Vue.component(NavBox.name, NavBox)

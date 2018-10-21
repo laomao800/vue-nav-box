@@ -2,7 +2,8 @@
   <div class="form-wrap">
     <div class="body">
       <nav-box height="360px" nav-width="160">
-        <nav-box-pane title="Form 1 Title">
+        <nav-box-pane>
+          <div slot="title"><strong>Form 1</strong> Title</div>
           <example-form />
         </nav-box-pane>
         <nav-box-pane title="Form 2 Title">
