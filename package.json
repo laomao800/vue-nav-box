@@ -1,13 +1,18 @@
 {
-  "name": "vue-nav-box",
+  "name": "@laomao800/vue-nav-box",
   "version": "0.1.0",
-  "private": true,
+  "author": "laomao800 <laomao800@gmail.com>",
+  "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "build:example": "vue-cli-service build --dest demo",
+    "build:lib": "vue-cli-service build --target lib --name vue-nav-box src/index.js",
+    "lint": "vue-cli-service lint",
+    "release": "node scripts/release.js"
   },
+  "main": "dist/vue-nav-box.common.js",
   "dependencies": {
+    "bezier-easing": "^2.1.0",
     "vue": "^2.5.17"
   },
   "devDependencies": {
@@ -15,8 +20,11 @@
     "@vue/cli-plugin-eslint": "^3.0.3",
     "@vue/cli-service": "^3.0.3",
     "@vue/eslint-config-standard": "^3.0.5",
+    "execa": "^1.0.0",
+    "inquirer": "^6.2.0",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
+    "semver": "^5.6.0",
     "vue-template-compiler": "^2.5.17"
   }
 }
