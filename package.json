@@ -1,8 +1,10 @@
 {
   "name": "@laomao800/vue-nav-box",
   "version": "1.0.1",
-  "author": "laomao800 <laomao800@gmail.com>",
-  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "dist/vue-nav-box.common.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build:example": "vue-cli-service build --dest demo",
@@ -11,7 +13,15 @@
     "release": "node scripts/release.js",
     "release:gh-pages": "git subtree push --prefix=demo origin gh-pages"
   },
-  "main": "dist/vue-nav-box.common.js",
+  "author": "laomao800 <laomao800@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/laomao800/vue-nav-box.git"
+  },
+  "bugs": {
+    "url": "https://github.com/laomao800/vue-nav-box/issues"
+  },
   "dependencies": {
     "bezier-easing": "^2.1.0",
     "vue": "^2.5.17"
