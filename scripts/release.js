@@ -57,11 +57,6 @@ const release = async () => {
         stdio: 'inherit'
       }
     )
-    await execa(
-      'git',
-      ['subtree', 'push', '--prefix=demo', 'origin', 'gh-pages'],
-      { stdio: 'inherit' }
-    )
   }
 }
 
