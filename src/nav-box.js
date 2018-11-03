@@ -31,6 +31,10 @@ export default {
     offsetTop: {
       type: Number,
       default: 0
+    },
+    foldable: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -154,7 +158,13 @@ export default {
 
   render() {
     return (
-      <div class="nav-box__wrapper" style={{ height: this.internalHeight }}>
+      <div
+        class={[
+          'nav-box__wrapper',
+          { 'nav-box__wrapper--foldable': this.foldable }
+        ]}
+        style={{ height: this.internalHeight }}
+      >
         <div ref="content" class="nav-box__content">
           {this.$slots.default}
         </div>

@@ -105,11 +105,14 @@
     }
   }
 
-  &__pane {
+  &__pane:not(:last-child) {
+    // 此处如果使用 margin 会导致在滚动到各子 pane 的交界处时，
+    // 有一瞬间获取定位错误从而导致导航栏的高亮视觉上产生跳动
     padding-bottom: 16px;
   }
 
-  &__head {
+  &__header {
+    position: relative;
     padding: 0.5em 1em;
     box-sizing: content-box;
     margin-bottom: 16px;
@@ -121,8 +124,57 @@
   }
 
   &__title {
+    display: inline-block;
     font-size: 16px;
-    font-weight: bold;
     cursor: default;
+  }
+
+  &__folder {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translate(0, -50%);
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+
+    &:hover {
+      border-color: #bbb;
+      cursor: pointer;
+    }
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: block;
+      height: 2px;
+      width: 10px;
+      background-color: #ddd;
+    }
+
+    &::after {
+      display: none;
+      transform: translate(-50%, -50%) rotate(-90deg);
+    }
+  }
+
+  &__pane--fold {
+    .nav-box__header {
+      margin-bottom: 0;
+    }
+    .nav-box__body {
+      display: none;
+    }
+    .nav-box__folder {
+      &::after {
+        display: block;
+      }
+    }
   }
 }
