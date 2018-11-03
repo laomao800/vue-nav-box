@@ -1,14 +1,14 @@
-/*! @laomao800/vue-nav-box v1.0.1 */
+/*! @laomao800/vue-nav-box v1.1.0 */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("vue"));
+		module.exports = factory();
 	else if(typeof define === 'function' && define.amd)
 		define([], factory);
 	else if(typeof exports === 'object')
-		exports["vue-nav-box"] = factory(require("vue"));
+		exports["vue-nav-box"] = factory();
 	else
-		root["vue-nav-box"] = factory(root["Vue"]);
-})((typeof self !== 'undefined' ? self : this), function(__WEBPACK_EXTERNAL_MODULE__8bbf__) {
+		root["vue-nav-box"] = factory();
+})((typeof self !== 'undefined' ? self : this), function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -1555,7 +1555,7 @@ exports = module.exports = __webpack_require__("2350")(false);
 
 
 // module
-exports.push([module.i, ".nav-box__wrapper{display:-webkit-box;display:-ms-flexbox;display:flex;height:100%}.nav-box__content{position:relative;-webkit-box-sizing:content-box;box-sizing:content-box;-webkit-box-flex:1;-ms-flex:1;flex:1;padding-right:16px;overflow:auto}.nav-box__content:hover::-webkit-scrollbar{opacity:1}.nav-box__content::-webkit-scrollbar{width:8px;height:8px;background-color:rgba(0,0,0,.06);-webkit-border-radius:100px;opacity:0}.nav-box__content::-webkit-scrollbar:hover{background-color:rgba(0,0,0,.09)}.nav-box__content::-webkit-scrollbar-thumb{background:rgba(0,0,0,.2);-webkit-border-radius:100px}.nav-box__content::-webkit-scrollbar-thumb:active{background:rgba(0,0,0,.6)}.nav-box__navs{-webkit-box-sizing:content-box;box-sizing:content-box;width:200px;padding-left:16px;overflow:auto}.nav-box__navs:hover::-webkit-scrollbar{opacity:1}.nav-box__navs::-webkit-scrollbar{width:8px;height:8px;background-color:rgba(0,0,0,.06);-webkit-border-radius:100px;opacity:0}.nav-box__navs::-webkit-scrollbar:hover{background-color:rgba(0,0,0,.09)}.nav-box__navs::-webkit-scrollbar-thumb{background:rgba(0,0,0,.2);-webkit-border-radius:100px}.nav-box__navs::-webkit-scrollbar-thumb:active{background:rgba(0,0,0,.6)}.nav-box__navs ul{height:100%;padding:0;margin:0;list-style:none;border-left:1px solid #eaeaea}.nav-box__nav{position:relative;padding:6px 0 6px 16px;margin-bottom:4px;font-size:14px;line-height:1.4em;min-height:1.4em;color:#333;cursor:pointer;-webkit-transition:color .4s;transition:color .4s}.nav-box__nav,.nav-box__nav:before{-webkit-box-sizing:content-box;box-sizing:content-box}.nav-box__nav:before{position:absolute;top:50%;left:0;display:block;width:6px;height:6px;content:\"\";background-color:#eee;border:4px solid;border-color:transparent;border-radius:50%;-webkit-transition:background-color .4s;transition:background-color .4s;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%)}.nav-box__nav:hover{color:#009efb}.nav-box__nav:hover:before{background-color:#ddd}.nav-box__nav--active{color:#009efb}.nav-box__nav--active:before{background-color:#fff!important;border-color:#009efb}.nav-box__pane{padding-bottom:16px}.nav-box__head{padding:.5em 1em;-webkit-box-sizing:content-box;box-sizing:content-box;margin-bottom:16px;line-height:1.8em;min-height:1.8em;background-color:#fafafa;border-bottom:1px solid #eaeaea;border-left:3px solid #009efb}.nav-box__title{font-size:16px;font-weight:700;cursor:default}", ""]);
+exports.push([module.i, ".nav-box__wrapper{display:-webkit-box;display:-ms-flexbox;display:flex;height:100%}.nav-box__content{position:relative;-webkit-box-sizing:content-box;box-sizing:content-box;-webkit-box-flex:1;-ms-flex:1;flex:1;padding-right:16px;overflow:auto}.nav-box__content:hover::-webkit-scrollbar{opacity:1}.nav-box__content::-webkit-scrollbar{width:8px;height:8px;background-color:rgba(0,0,0,.06);-webkit-border-radius:100px;opacity:0}.nav-box__content::-webkit-scrollbar:hover{background-color:rgba(0,0,0,.09)}.nav-box__content::-webkit-scrollbar-thumb{background:rgba(0,0,0,.2);-webkit-border-radius:100px}.nav-box__content::-webkit-scrollbar-thumb:active{background:rgba(0,0,0,.6)}.nav-box__navs{-webkit-box-sizing:content-box;box-sizing:content-box;width:200px;padding-left:16px;overflow:auto}.nav-box__navs:hover::-webkit-scrollbar{opacity:1}.nav-box__navs::-webkit-scrollbar{width:8px;height:8px;background-color:rgba(0,0,0,.06);-webkit-border-radius:100px;opacity:0}.nav-box__navs::-webkit-scrollbar:hover{background-color:rgba(0,0,0,.09)}.nav-box__navs::-webkit-scrollbar-thumb{background:rgba(0,0,0,.2);-webkit-border-radius:100px}.nav-box__navs::-webkit-scrollbar-thumb:active{background:rgba(0,0,0,.6)}.nav-box__navs ul{height:100%;padding:0;margin:0;list-style:none;border-left:1px solid #eaeaea}.nav-box__nav{position:relative;padding:6px 0 6px 16px;margin-bottom:4px;font-size:14px;line-height:1.4em;min-height:1.4em;color:#333;cursor:pointer;-webkit-transition:color .4s;transition:color .4s}.nav-box__nav,.nav-box__nav:before{-webkit-box-sizing:content-box;box-sizing:content-box}.nav-box__nav:before{position:absolute;top:50%;left:0;display:block;width:6px;height:6px;content:\"\";background-color:#eee;border:4px solid;border-color:transparent;border-radius:50%;-webkit-transition:background-color .4s;transition:background-color .4s;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%)}.nav-box__nav:hover{color:#009efb}.nav-box__nav:hover:before{background-color:#ddd}.nav-box__nav--active{color:#009efb}.nav-box__nav--active:before{background-color:#fff!important;border-color:#009efb}.nav-box__pane:not(:last-child){padding-bottom:16px}.nav-box__header{position:relative;padding:.5em 1em;-webkit-box-sizing:content-box;box-sizing:content-box;margin-bottom:16px;line-height:1.8em;min-height:1.8em;background-color:#fafafa;border-left:3px solid #009efb;-webkit-box-shadow:inset 0 -1px 0 0 #eaeaea;box-shadow:inset 0 -1px 0 0 #eaeaea}.nav-box__title{display:inline-block;font-size:16px;cursor:default}.nav-box__folder{position:absolute;top:50%;right:16px;-webkit-transform:translateY(-50%);transform:translateY(-50%);width:20px;height:20px;background-color:#fff;border:1px solid #ddd;border-radius:2px}.nav-box__folder:hover{border-color:#bbb;cursor:pointer}.nav-box__folder:after,.nav-box__folder:before{content:\"\";position:absolute;top:50%;left:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);display:block;height:2px;width:10px;background-color:#ddd}.nav-box__folder:after{display:none;-webkit-transform:translate(-50%,-50%) rotate(-90deg);transform:translate(-50%,-50%) rotate(-90deg)}.nav-box__pane--fold .nav-box__header{margin-bottom:0}.nav-box__pane--fold .nav-box__body{display:none}.nav-box__pane--fold .nav-box__folder:after{display:block}", ""]);
 
 // exports
 
@@ -1779,13 +1779,6 @@ module.exports = {
   check: check
 };
 
-
-/***/ }),
-
-/***/ "8bbf":
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE__8bbf__;
 
 /***/ }),
 
@@ -3235,10 +3228,6 @@ if (typeof window !== 'undefined') {
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.function.name.js
 var es6_function_name = __webpack_require__("7f7f");
 
-// EXTERNAL MODULE: external {"commonjs":"vue","commonjs2":"vue","root":"Vue"}
-var external_commonjs_vue_commonjs2_vue_root_Vue_ = __webpack_require__("8bbf");
-var external_commonjs_vue_commonjs2_vue_root_Vue_default = /*#__PURE__*/__webpack_require__.n(external_commonjs_vue_commonjs2_vue_root_Vue_);
-
 // EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom.iterable.js
 var web_dom_iterable = __webpack_require__("ac6a");
 
@@ -3331,6 +3320,10 @@ function parseSizeUnit(unit) {
     offsetTop: {
       type: Number,
       default: 0
+    },
+    foldable: {
+      type: Boolean,
+      default: false
     }
   },
   data: function data() {
@@ -3477,7 +3470,9 @@ function parseSizeUnit(unit) {
 
     var h = arguments[0];
     return h("div", {
-      "class": "nav-box__wrapper",
+      "class": ['nav-box__wrapper', {
+        'nav-box__wrapper--foldable': this.foldable
+      }],
       style: {
         height: this.internalHeight
       }
@@ -3505,27 +3500,86 @@ function parseSizeUnit(unit) {
   }
 });
 // CONCATENATED MODULE: ./src/nav-box-pane.js
+
 /* harmony default export */ var nav_box_pane = ({
   name: 'NavBoxPane',
   props: {
     title: {
       type: String,
       default: null
+    },
+    foldable: {
+      type: Boolean,
+      default: true
+    },
+    fold: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data: function data() {
+    return {
+      internalFoldable: false,
+      internalFold: false
+    };
+  },
+  computed: {
+    owner: function owner() {
+      return this.$parent.$options.name === 'NavBox' ? this.$parent : null;
+    },
+    ownerFolable: function ownerFolable() {
+      return this.owner ? this.owner.foldable : false;
+    }
+  },
+  watch: {
+    foldable: {
+      immediate: true,
+      handler: function handler(val) {
+        this.internalFoldable = this.ownerFolable ? val : false;
+      }
+    },
+    fold: {
+      immediate: true,
+      handler: function handler(val) {
+        this.internalFold = this.ownerFolable ? val : false;
+      }
+    },
+    ownerFolable: function ownerFolable(val) {
+      if (val) {
+        this.internalFoldable = this.foldable;
+        this.internalFold = this.fold;
+      } else {
+        this.internalFoldable = false;
+        this.internalFold = false;
+      }
     }
   },
   mounted: function mounted() {
-    this.$parent.addNav && this.$parent.addNav(this);
+    this.owner && this.owner.addNav(this);
   },
   render: function render() {
+    var _this = this;
+
     var h = arguments[0];
     return h("div", {
-      "class": "nav-box__pane"
+      "class": ['nav-box__pane', {
+        'nav-box__pane--fold': this.internalFold
+      }]
     }, [h("div", {
-      "class": "nav-box__head"
+      "class": "nav-box__header"
     }, [h("div", {
       "class": "nav-box__title"
-    }, [this.$slots.title ? this.$slots.title : this.title])]), h("div", {
-      "class": "nav-box__body"
+    }, [this.$slots.title ? this.$slots.title : this.title]), this.internalFoldable ? h("span", {
+      "class": "nav-box__folder",
+      on: {
+        "click": function click() {
+          return _this.internalFold = !_this.internalFold;
+        }
+      }
+    }) : null]), h("div", {
+      "class": ['nav-box__body', {
+        'nav-box__body--fold': this.internalFold
+      }]
     }, [this.$slots.default])]);
   }
 });
@@ -3538,13 +3592,12 @@ var src_nav_box = __webpack_require__("a1b7");
 
 
 
-
-nav_box.install = function () {
-  external_commonjs_vue_commonjs2_vue_root_Vue_default.a.component(nav_box.name, nav_box);
+nav_box.install = function (Vue) {
+  Vue.component(nav_box.name, nav_box);
 };
 
-nav_box_pane.install = function () {
-  external_commonjs_vue_commonjs2_vue_root_Vue_default.a.component(nav_box_pane.name, nav_box_pane);
+nav_box_pane.install = function (Vue) {
+  Vue.component(nav_box_pane.name, nav_box_pane);
 };
 
 if (typeof window !== 'undefined' && window.Vue) {
