@@ -27,7 +27,7 @@ https://laomao800.github.io/vue-nav-box/
 </template>
 
 <script>
-import { NavBox, NavBoxPane } from '../src'
+import { NavBox, NavBoxPane } from '@laomao800/vue-nav-box'
 
 export default {
   components: {
