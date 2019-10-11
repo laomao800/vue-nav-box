@@ -40,25 +40,25 @@ export default {
 
 ## Props
 
-### nav-box
+### `<nav-box />`
 
-| Prop      | Type           | Default | Info |
-| --------- | -------------- | ------- | ---- |
-| height    | String, Number | null    | Navigation wrap box's height. e.g. `500`, `500px` |
-| navWidth  | String, Number | null    | Navigation sidebar width. e.g. `160`, `160px` |
-| duration  | Number         | 400     | Scroll animation time.
-| offsetTop | Number         | 0       | Amount of space between top of wrapper and the section to active.
-| foldable  | Boolean        | false   | Enable child panes foldable
+| Prop      | Type           | Default | Info                                                              |
+| --------- | -------------- | ------- | ----------------------------------------------------------------- |
+| height    | String, Number | `null`  | Navigation wrap box's height. e.g. `500`, `500px`                 |
+| navWidth  | String, Number | `null`  | Navigation sidebar width. e.g. `160`, `160px`                     |
+| duration  | Number         | `400`   | Scroll animation time.                                            |
+| offsetTop | Number         | `0`     | Amount of space between top of wrapper and the section to active. |
+| foldable  | Boolean        | `false` | Enable child panes foldable                                       |
 
-### nav-box-pane
+### `<nav-box-pane />`
 
-**`<nav-box-pane />` needs to wrap in the `<nav-box />`**
+**needs to wrap in the `<nav-box />`**
 
-| Prop     | Type    | Default | Info |
-| -------- | ------- | ------- | ---- |
-| title    | String  | null    | Section title
-| foldable | Boolean | -       | Specify the child pane foldable. Only on `<nav-box />` `foldable` is `true`
-| fold     | Boolean | -       | Specify the child pane whether fold by default. Only on `<nav-box />` `foldable` is `true`
+| Prop     | Type    | Default | Info                                                                                       |
+| -------- | ------- | ------- | ------------------------------------------------------------------------------------------ |
+| title    | String  | `null`  | Section title                                                                              |
+| foldable | Boolean | `true`  | Specify the child pane foldable. Only on `<nav-box />` `foldable` is `true`                |
+| fold     | Boolean | `false` | Specify the child pane whether fold by default. Only on `<nav-box />` `foldable` is `true` |
 
 ## Project scrips
 
