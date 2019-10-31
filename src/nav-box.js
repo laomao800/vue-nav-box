@@ -2,15 +2,7 @@
  * Scroll feature fork from https://github.com/eddiemf/vue-scrollactive
  */
 import bezierEasing from 'bezier-easing'
-
-function parseSizeUnit(unit) {
-  if (unit) {
-    const isPercent = /\d+%/.test(unit)
-    const size = parseInt(unit, 10)
-    return size ? (isPercent ? `${size}%` : `${size}px`) : null
-  }
-  return null
-}
+import parseSizeUnit from '@laomao800/parse-size-with-unit'
 
 export default {
   name: 'NavBox',
@@ -71,7 +63,7 @@ export default {
       this.navs.push(item)
     },
 
-    async navClick(nav) {
+    navClick(nav) {
       const target = nav.$el
 
       if (!target) {
@@ -80,38 +72,36 @@ export default {
 
       this.scrollByNav = true
       this.activeItem = nav
-      await this.scrollTo(target)
-      this.scrollByNav = false
+      this.scrollTo(target, () => {
+        this.scrollByNav = false
+      })
     },
 
-    scrollTo(target) {
-      return new Promise(resolve => {
-        const targetDistanceFromTop = this.getOffsetTop(target)
-        const startingY = this.scrollContainer.scrollTop
-        const difference = targetDistanceFromTop - startingY
-        const easing = bezierEasing(0.5, 0, 0.35, 1)
-        let start = null
+    scrollTo(target, callback) {
+      const targetDistanceFromTop = this.getOffsetTop(target)
+      const startingY = this.scrollContainer.scrollTop
+      const difference = targetDistanceFromTop - startingY
+      const easing = bezierEasing(0.5, 0, 0.35, 1)
+      let start = null
 
-        const step = timestamp => {
-          if (!start) start = timestamp
-          let progress = timestamp - start
-          let progressPercentage = progress / this.duration
-          if (progress >= this.duration) progress = this.duration
-          if (progressPercentage >= 1) progressPercentage = 1
-          const perTick =
-            startingY +
-            easing(progressPercentage) * (difference - this.offsetTop)
-          this.scrollContainer.scrollTo(0, perTick)
-          if (progress < this.duration) {
-            this.scrollAnimationFrame = window.requestAnimationFrame(step)
-          } else {
-            this.scrollContainer.addEventListener('scroll', this.onScroll)
-            resolve()
-          }
+      const step = timestamp => {
+        if (!start) start = timestamp
+        let progress = timestamp - start
+        let progressPercentage = progress / this.duration
+        if (progress >= this.duration) progress = this.duration
+        if (progressPercentage >= 1) progressPercentage = 1
+        const perTick =
+          startingY + easing(progressPercentage) * (difference - this.offsetTop)
+        this.scrollContainer.scrollTo(0, perTick)
+        if (progress < this.duration) {
+          this.scrollAnimationFrame = window.requestAnimationFrame(step)
+        } else {
+          this.scrollContainer.addEventListener('scroll', this.onScroll)
+          callback()
         }
+      }
 
-        window.requestAnimationFrame(step)
-      })
+      window.requestAnimationFrame(step)
     },
 
     getOffsetTop(target) {
@@ -183,7 +173,7 @@ export default {
                 ]}
                 on-click={() => this.navClick(nav)}
               >
-                {nav.$slots.title ? nav.$slots.title : nav.title}
+                {nav.$slots.title || nav.title}
               </li>
             ))}
           </ul>

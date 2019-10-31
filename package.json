@@ -23,6 +23,7 @@
     "url": "https://github.com/laomao800/vue-nav-box/issues"
   },
   "dependencies": {
+    "@laomao800/parse-size-with-unit": "^1.0.0",
     "bezier-easing": "^2.1.0",
     "vue": "^2.5.17"
   },
