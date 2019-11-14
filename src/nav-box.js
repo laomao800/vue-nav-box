@@ -28,7 +28,7 @@ export default {
       type: Boolean,
       default: false
     },
-    navsHidden: {
+    navHidden: {
       type: Boolean,
       default: false
     }
@@ -53,11 +53,13 @@ export default {
   },
 
   mounted() {
+    if (this.navHidden) return
     this.scrollContainer = this.$refs.content
     this.scrollContainer.addEventListener('scroll', this.onScroll)
   },
 
   beforeDestroy() {
+    if (this.navHidden) return
     this.scrollContainer.removeEventListener('scroll', this.onScroll)
     window.cancelAnimationFrame(this.scrollAnimationFrame)
   },
@@ -162,7 +164,7 @@ export default {
         <div ref="content" class="nav-box__content">
           {this.$slots.default}
         </div>
-        {this.navsHidden ? null : (
+        {this.navHidden ? null : (
           <div class="nav-box__navs" style={{ width: this.internalNavWidth }}>
             <ul>
               {this.navs.map((nav, index) => (

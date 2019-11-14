@@ -49,7 +49,7 @@ export default {
 | duration  | Number         | `400`   | Scroll animation time.                                            |
 | offsetTop | Number         | `0`     | Amount of space between top of wrapper and the section to active. |
 | foldable  | Boolean        | `false` | Enable child panes foldable                                       |
-| navsHidden| Boolean        | `false` | Enable hidden navs-side                                           |
+| navHidden | Boolean        | `false` | Whether hide the navbar                                           |
 
 ### `<nav-box-pane />`
 
