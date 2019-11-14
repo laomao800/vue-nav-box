@@ -27,6 +27,10 @@ export default {
     foldable: {
       type: Boolean,
       default: false
+    },
+    navsHidden: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -158,26 +162,28 @@ export default {
         <div ref="content" class="nav-box__content">
           {this.$slots.default}
         </div>
-        <div class="nav-box__navs" style={{ width: this.internalNavWidth }}>
-          <ul>
-            {this.navs.map((nav, index) => (
-              <li
-                key={index}
-                class={[
-                  'nav-box__nav',
-                  {
-                    'nav-box__nav--active': this.activeItem
-                      ? this.activeItem === nav
-                      : index === 0
-                  }
-                ]}
-                on-click={() => this.navClick(nav)}
-              >
-                {nav.$slots.title || nav.title}
-              </li>
-            ))}
-          </ul>
-        </div>
+        {this.navsHidden ? null : (
+          <div class="nav-box__navs" style={{ width: this.internalNavWidth }}>
+            <ul>
+              {this.navs.map((nav, index) => (
+                <li
+                  key={index}
+                  class={[
+                    'nav-box__nav',
+                    {
+                      'nav-box__nav--active': this.activeItem
+                        ? this.activeItem === nav
+                        : index === 0
+                    }
+                  ]}
+                  on-click={() => this.navClick(nav)}
+                >
+                  {nav.$slots.title || nav.title}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     )
   }
