@@ -27,6 +27,10 @@ export default {
     foldable: {
       type: Boolean,
       default: false
+    },
+    navHidden: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -49,11 +53,13 @@ export default {
   },
 
   mounted() {
+    if (this.navHidden) return
     this.scrollContainer = this.$refs.content
     this.scrollContainer.addEventListener('scroll', this.onScroll)
   },
 
   beforeDestroy() {
+    if (this.navHidden) return
     this.scrollContainer.removeEventListener('scroll', this.onScroll)
     window.cancelAnimationFrame(this.scrollAnimationFrame)
   },
@@ -158,26 +164,28 @@ export default {
         <div ref="content" class="nav-box__content">
           {this.$slots.default}
         </div>
-        <div class="nav-box__navs" style={{ width: this.internalNavWidth }}>
-          <ul>
-            {this.navs.map((nav, index) => (
-              <li
-                key={index}
-                class={[
-                  'nav-box__nav',
-                  {
-                    'nav-box__nav--active': this.activeItem
-                      ? this.activeItem === nav
-                      : index === 0
-                  }
-                ]}
-                on-click={() => this.navClick(nav)}
-              >
-                {nav.$slots.title || nav.title}
-              </li>
-            ))}
-          </ul>
-        </div>
+        {this.navHidden ? null : (
+          <div class="nav-box__navs" style={{ width: this.internalNavWidth }}>
+            <ul>
+              {this.navs.map((nav, index) => (
+                <li
+                  key={index}
+                  class={[
+                    'nav-box__nav',
+                    {
+                      'nav-box__nav--active': this.activeItem
+                        ? this.activeItem === nav
+                        : index === 0
+                    }
+                  ]}
+                  on-click={() => this.navClick(nav)}
+                >
+                  {nav.$slots.title || nav.title}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     )
   }
