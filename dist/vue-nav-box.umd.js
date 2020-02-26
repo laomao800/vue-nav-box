@@ -1,4 +1,4 @@
-/*! @laomao800/vue-nav-box v1.1.1 */
+/*! @laomao800/vue-nav-box v1.2.1 */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -1815,6 +1815,10 @@ var parse_size_with_unit_default = /*#__PURE__*/__webpack_require__.n(parse_size
     foldable: {
       type: Boolean,
       default: false
+    },
+    navHidden: {
+      type: Boolean,
+      default: false
     }
   },
   data: function data() {
@@ -1834,10 +1838,12 @@ var parse_size_with_unit_default = /*#__PURE__*/__webpack_require__.n(parse_size
     }
   },
   mounted: function mounted() {
+    if (this.navHidden) return;
     this.scrollContainer = this.$refs.content;
     this.scrollContainer.addEventListener('scroll', this.onScroll);
   },
   beforeDestroy: function beforeDestroy() {
+    if (this.navHidden) return;
     this.scrollContainer.removeEventListener('scroll', this.onScroll);
     window.cancelAnimationFrame(this.scrollAnimationFrame);
   },
@@ -1943,7 +1949,7 @@ var parse_size_with_unit_default = /*#__PURE__*/__webpack_require__.n(parse_size
     }, [h("div", {
       ref: "content",
       "class": "nav-box__content"
-    }, [this.$slots.default]), h("div", {
+    }, [this.$slots.default]), this.navHidden ? null : h("div", {
       "class": "nav-box__navs",
       style: {
         width: this.internalNavWidth
