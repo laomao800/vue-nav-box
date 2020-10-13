@@ -52,10 +52,17 @@ export default {
     }
   },
 
+  watch: {
+    navHidden(val) {
+      if (!val) {
+        this.init()
+      }
+    }
+  },
+
   mounted() {
     if (this.navHidden) return
-    this.scrollContainer = this.$refs.content
-    this.scrollContainer.addEventListener('scroll', this.onScroll)
+    this.init()
   },
 
   beforeDestroy() {
@@ -65,6 +72,11 @@ export default {
   },
 
   methods: {
+    init() {
+      this.scrollContainer = this.$refs.content
+      this.scrollContainer.addEventListener('scroll', this.onScroll)
+    },
+
     addNav(item) {
       this.navs.push(item)
     },
