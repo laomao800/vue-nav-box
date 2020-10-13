@@ -53,28 +53,34 @@ export default {
   },
 
   watch: {
-    navHidden(val) {
-      if (!val) {
-        this.init()
+    navHidden: {
+      immediate: true,
+      handler(newVal) {
+        if (newVal) {
+          this.teardown()
+        } else {
+          this.init()
+        }
       }
     }
   },
 
-  mounted() {
-    if (this.navHidden) return
-    this.init()
-  },
-
   beforeDestroy() {
-    if (this.navHidden) return
-    this.scrollContainer.removeEventListener('scroll', this.onScroll)
-    window.cancelAnimationFrame(this.scrollAnimationFrame)
+    this.teardown()
   },
 
   methods: {
     init() {
-      this.scrollContainer = this.$refs.content
-      this.scrollContainer.addEventListener('scroll', this.onScroll)
+      this.$nextTick(() =>
+        this.$refs.content.addEventListener('scroll', this.onScroll)
+      )
+    },
+
+    teardown() {
+      this.$nextTick(() =>
+        this.$refs.content.removeEventListener('scroll', this.onScroll)
+      )
+      window.cancelAnimationFrame(this.scrollAnimationFrame)
     },
 
     addNav(item) {
@@ -97,7 +103,7 @@ export default {
 
     scrollTo(target, callback) {
       const targetDistanceFromTop = this.getOffsetTop(target)
-      const startingY = this.scrollContainer.scrollTop
+      const startingY = this.$refs.content.scrollTop
       const difference = targetDistanceFromTop - startingY
       const easing = bezierEasing(0.5, 0, 0.35, 1)
       let start = null
@@ -110,11 +116,11 @@ export default {
         if (progressPercentage >= 1) progressPercentage = 1
         const perTick =
           startingY + easing(progressPercentage) * (difference - this.offsetTop)
-        this.scrollContainer.scrollTo(0, perTick)
+        this.$refs.content.scrollTo(0, perTick)
         if (progress < this.duration) {
           this.scrollAnimationFrame = window.requestAnimationFrame(step)
         } else {
-          this.scrollContainer.addEventListener('scroll', this.onScroll)
+          this.$refs.content.addEventListener('scroll', this.onScroll)
           callback()
         }
       }
@@ -125,7 +131,7 @@ export default {
     getOffsetTop(target) {
       let yPosition = 0
       let nextElement = target
-      while (nextElement && nextElement !== this.scrollContainer) {
+      while (nextElement && nextElement !== this.$refs.content) {
         yPosition += nextElement.offsetTop
         nextElement = nextElement.offsetParent
       }
@@ -152,7 +158,7 @@ export default {
       this.navs.forEach(item => {
         const target = item.$el
         if (!target) return
-        const distanceFromTop = this.scrollContainer.scrollTop
+        const distanceFromTop = this.$refs.content.scrollTop
         const isScreenPastSection =
           distanceFromTop >= this.getOffsetTop(target) - this.offsetTop
         const isScreenBeforeSectionEnd =
