@@ -1,4 +1,4 @@
-/*! @laomao800/vue-nav-box v1.2.1 */
+/*! @laomao800/vue-nav-box v1.2.2 */
 module.exports =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -1828,22 +1828,42 @@ var parse_size_with_unit_default = /*#__PURE__*/__webpack_require__.n(parse_size
       return parse_size_with_unit_default()(this.navWidth);
     }
   },
-  mounted: function mounted() {
-    if (this.navHidden) return;
-    this.scrollContainer = this.$refs.content;
-    this.scrollContainer.addEventListener('scroll', this.onScroll);
+  watch: {
+    navHidden: {
+      immediate: true,
+      handler: function handler(newVal) {
+        if (newVal) {
+          this.teardown();
+        } else {
+          this.init();
+        }
+      }
+    }
   },
   beforeDestroy: function beforeDestroy() {
-    if (this.navHidden) return;
-    this.scrollContainer.removeEventListener('scroll', this.onScroll);
-    window.cancelAnimationFrame(this.scrollAnimationFrame);
+    this.teardown();
   },
   methods: {
+    init: function init() {
+      var _this = this;
+
+      this.$nextTick(function () {
+        return _this.$refs.content.addEventListener('scroll', _this.onScroll);
+      });
+    },
+    teardown: function teardown() {
+      var _this2 = this;
+
+      this.$nextTick(function () {
+        return _this2.$refs.content.removeEventListener('scroll', _this2.onScroll);
+      });
+      window.cancelAnimationFrame(this.scrollAnimationFrame);
+    },
     addNav: function addNav(item) {
       this.navs.push(item);
     },
     navClick: function navClick(nav) {
-      var _this = this;
+      var _this3 = this;
 
       var target = nav.$el;
 
@@ -1854,14 +1874,14 @@ var parse_size_with_unit_default = /*#__PURE__*/__webpack_require__.n(parse_size
       this.scrollByNav = true;
       this.activeItem = nav;
       this.scrollTo(target, function () {
-        _this.scrollByNav = false;
+        _this3.scrollByNav = false;
       });
     },
     scrollTo: function scrollTo(target, callback) {
-      var _this2 = this;
+      var _this4 = this;
 
       var targetDistanceFromTop = this.getOffsetTop(target);
-      var startingY = this.scrollContainer.scrollTop;
+      var startingY = this.$refs.content.scrollTop;
       var difference = targetDistanceFromTop - startingY;
       var easing = src_default()(0.5, 0, 0.35, 1);
       var start = null;
@@ -1869,18 +1889,18 @@ var parse_size_with_unit_default = /*#__PURE__*/__webpack_require__.n(parse_size
       var step = function step(timestamp) {
         if (!start) start = timestamp;
         var progress = timestamp - start;
-        var progressPercentage = progress / _this2.duration;
-        if (progress >= _this2.duration) progress = _this2.duration;
+        var progressPercentage = progress / _this4.duration;
+        if (progress >= _this4.duration) progress = _this4.duration;
         if (progressPercentage >= 1) progressPercentage = 1;
 
-        var perTick = startingY + easing(progressPercentage) * (difference - _this2.offsetTop);
+        var perTick = startingY + easing(progressPercentage) * (difference - _this4.offsetTop);
 
-        _this2.scrollContainer.scrollTo(0, perTick);
+        _this4.$refs.content.scrollTo(0, perTick);
 
-        if (progress < _this2.duration) {
-          _this2.scrollAnimationFrame = window.requestAnimationFrame(step);
+        if (progress < _this4.duration) {
+          _this4.scrollAnimationFrame = window.requestAnimationFrame(step);
         } else {
-          _this2.scrollContainer.addEventListener('scroll', _this2.onScroll);
+          _this4.$refs.content.addEventListener('scroll', _this4.onScroll);
 
           callback();
         }
@@ -1892,7 +1912,7 @@ var parse_size_with_unit_default = /*#__PURE__*/__webpack_require__.n(parse_size
       var yPosition = 0;
       var nextElement = target;
 
-      while (nextElement && nextElement !== this.scrollContainer) {
+      while (nextElement && nextElement !== this.$refs.content) {
         yPosition += nextElement.offsetTop;
         nextElement = nextElement.offsetParent;
       }
@@ -1910,24 +1930,24 @@ var parse_size_with_unit_default = /*#__PURE__*/__webpack_require__.n(parse_size
       }
     },
     getItemInsideWindow: function getItemInsideWindow() {
-      var _this3 = this;
+      var _this5 = this;
 
       var activeItem;
       this.navs.forEach(function (item) {
         var target = item.$el;
         if (!target) return;
-        var distanceFromTop = _this3.scrollContainer.scrollTop;
+        var distanceFromTop = _this5.$refs.content.scrollTop;
 
-        var isScreenPastSection = distanceFromTop >= _this3.getOffsetTop(target) - _this3.offsetTop;
+        var isScreenPastSection = distanceFromTop >= _this5.getOffsetTop(target) - _this5.offsetTop;
 
-        var isScreenBeforeSectionEnd = distanceFromTop < _this3.getOffsetTop(target) - _this3.offsetTop + target.offsetHeight;
+        var isScreenBeforeSectionEnd = distanceFromTop < _this5.getOffsetTop(target) - _this5.offsetTop + target.offsetHeight;
         if (isScreenPastSection && isScreenBeforeSectionEnd) activeItem = item;
       });
       return activeItem;
     }
   },
   render: function render() {
-    var _this4 = this;
+    var _this6 = this;
 
     var h = arguments[0];
     return h("div", {
@@ -1949,11 +1969,11 @@ var parse_size_with_unit_default = /*#__PURE__*/__webpack_require__.n(parse_size
       return h("li", {
         key: index,
         "class": ['nav-box__nav', {
-          'nav-box__nav--active': _this4.activeItem ? _this4.activeItem === nav : index === 0
+          'nav-box__nav--active': _this6.activeItem ? _this6.activeItem === nav : index === 0
         }],
         on: {
           "click": function click() {
-            return _this4.navClick(nav);
+            return _this6.navClick(nav);
           }
         }
       }, [nav.$slots.title || nav.title]);
