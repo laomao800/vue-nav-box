@@ -77,10 +77,10 @@ export default {
     },
 
     teardown() {
-      this.$nextTick(() =>
+      this.$refs.content &&
         this.$refs.content.removeEventListener('scroll', this.onScroll)
-      )
-      window.cancelAnimationFrame(this.scrollAnimationFrame)
+      this.scrollAnimationFrame &&
+        window.cancelAnimationFrame(this.scrollAnimationFrame)
     },
 
     addNav(item) {
