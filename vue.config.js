@@ -1,6 +1,4 @@
 module.exports = {
-  baseUrl: '',
-
   pages: {
     index: {
       entry: 'example/main.js'

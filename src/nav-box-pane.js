@@ -4,22 +4,22 @@ export default {
   props: {
     title: {
       type: String,
-      default: null
+      default: null,
     },
     foldable: {
       type: Boolean,
-      default: true
+      default: true,
     },
     fold: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
 
   data() {
     return {
       internalFoldable: false,
-      internalFold: false
+      internalFold: false,
     }
   },
 
@@ -29,7 +29,7 @@ export default {
     },
     ownerFolable() {
       return this.owner ? this.owner.foldable : false
-    }
+    },
   },
 
   watch: {
@@ -37,13 +37,13 @@ export default {
       immediate: true,
       handler(val) {
         this.internalFoldable = this.ownerFolable ? val : false
-      }
+      },
     },
     fold: {
       immediate: true,
       handler(val) {
         this.internalFold = this.ownerFolable ? val : false
-      }
+      },
     },
     ownerFolable(val) {
       if (val) {
@@ -53,7 +53,7 @@ export default {
         this.internalFoldable = false
         this.internalFold = false
       }
-    }
+    },
   },
 
   mounted() {
@@ -79,12 +79,12 @@ export default {
         <div
           class={[
             'nav-box__body',
-            { 'nav-box__body--fold': this.internalFold }
+            { 'nav-box__body--fold': this.internalFold },
           ]}
         >
           {this.$slots.default}
         </div>
       </div>
     )
-  }
+  },
 }

@@ -10,28 +10,28 @@ export default {
   props: {
     height: {
       type: [String, Number],
-      default: null
+      default: null,
     },
     navWidth: {
       type: [String, Number],
-      default: null
+      default: null,
     },
     duration: {
       type: Number,
-      default: 400
+      default: 400,
     },
     offsetTop: {
       type: Number,
-      default: 0
+      default: 0,
     },
     foldable: {
       type: Boolean,
-      default: false
+      default: false,
     },
     navHidden: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
 
   data() {
@@ -39,7 +39,7 @@ export default {
       navs: [],
       activeItem: null,
       lastActiveItem: null,
-      scrollByNav: false
+      scrollByNav: false,
     }
   },
 
@@ -49,7 +49,7 @@ export default {
     },
     internalNavWidth() {
       return parseSizeUnit(this.navWidth)
-    }
+    },
   },
 
   watch: {
@@ -61,8 +61,8 @@ export default {
         } else {
           this.init()
         }
-      }
-    }
+      },
+    },
   },
 
   beforeDestroy() {
@@ -108,7 +108,7 @@ export default {
       const easing = bezierEasing(0.5, 0, 0.35, 1)
       let start = null
 
-      const step = timestamp => {
+      const step = (timestamp) => {
         if (!start) start = timestamp
         let progress = timestamp - start
         let progressPercentage = progress / this.duration
@@ -155,7 +155,7 @@ export default {
 
     getItemInsideWindow() {
       let activeItem
-      this.navs.forEach(item => {
+      this.navs.forEach((item) => {
         const target = item.$el
         if (!target) return
         const distanceFromTop = this.$refs.content.scrollTop
@@ -167,7 +167,7 @@ export default {
         if (isScreenPastSection && isScreenBeforeSectionEnd) activeItem = item
       })
       return activeItem
-    }
+    },
   },
 
   render() {
@@ -175,7 +175,7 @@ export default {
       <div
         class={[
           'nav-box__wrapper',
-          { 'nav-box__wrapper--foldable': this.foldable }
+          { 'nav-box__wrapper--foldable': this.foldable },
         ]}
         style={{ height: this.internalHeight }}
       >
@@ -193,8 +193,8 @@ export default {
                     {
                       'nav-box__nav--active': this.activeItem
                         ? this.activeItem === nav
-                        : index === 0
-                    }
+                        : index === 0,
+                    },
                   ]}
                   on-click={() => this.navClick(nav)}
                 >
@@ -206,5 +206,5 @@ export default {
         )}
       </div>
     )
-  }
+  },
 }
