@@ -46,6 +46,7 @@ export default {
 | --------- | -------------- | ------- | ----------------------------------------------------------------- |
 | height    | String, Number | `null`  | Navigation wrap box's height. e.g. `500`, `500px`                 |
 | navWidth  | String, Number | `null`  | Navigation sidebar width. e.g. `160`, `160px`                     |
+| navePosition | String | `''` | Navigation sidebar position. e.g. `'left'` |
 | duration  | Number         | `400`   | Scroll animation time.                                            |
 | offsetTop | Number         | `0`     | Amount of space between top of wrapper and the section to active. |
 | foldable  | Boolean        | `false` | Enable child panes foldable                                       |

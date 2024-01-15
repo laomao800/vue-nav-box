@@ -178,3 +178,28 @@
     }
   }
 }
+
+.nav-box {
+  &__wrapper--nav-left {
+    flex-direction: row-reverse;
+
+    .nav-box__navs {
+      padding-right: 16px;
+      padding-left: 0;
+
+      ul {
+        border-left: none;
+        border-right: 1px solid #eaeaea;
+      }
+    }
+    .nav-box__nav {
+      text-align: right;
+      padding: 6px 16px 6px 0;
+      &::before {
+        left: initial;
+        right: 0;
+        transform: translate(50%, -50%);
+      }
+    }
+  }
+}

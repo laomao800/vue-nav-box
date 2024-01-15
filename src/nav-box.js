@@ -2,7 +2,7 @@
  * Scroll feature fork from https://github.com/eddiemf/vue-scrollactive
  */
 import bezierEasing from 'bezier-easing'
-import parseSizeUnit from '@laomao800/parse-size-with-unit'
+import parseSize from '@laomao800/parse-size'
 
 export default {
   name: 'NavBox',
@@ -15,6 +15,9 @@ export default {
     navWidth: {
       type: [String, Number],
       default: null,
+    },
+    navPosition: {
+      type: String,
     },
     duration: {
       type: Number,
@@ -45,10 +48,10 @@ export default {
 
   computed: {
     internalHeight() {
-      return parseSizeUnit(this.height)
+      return parseSize(this.height)
     },
     internalNavWidth() {
-      return parseSizeUnit(this.navWidth)
+      return parseSize(this.navWidth)
     },
   },
 
@@ -72,7 +75,7 @@ export default {
   methods: {
     init() {
       this.$nextTick(() =>
-        this.$refs.content.addEventListener('scroll', this.onScroll)
+        this.$refs.content.addEventListener('scroll', this.onScroll),
       )
     },
 
@@ -146,7 +149,7 @@ export default {
             'activeChanged',
             event,
             this.activeItem,
-            this.lastActiveItem
+            this.lastActiveItem,
           )
           this.lastActiveItem = this.activeItem
         }
@@ -173,10 +176,11 @@ export default {
   render() {
     return (
       <div
-        class={[
-          'nav-box__wrapper',
-          { 'nav-box__wrapper--foldable': this.foldable },
-        ]}
+        class={{
+          'nav-box__wrapper': true,
+          'nav-box__wrapper--foldable': this.foldable,
+          [`nav-box__wrapper--nav-${this.navPosition}`]: this.foldable,
+        }}
         style={{ height: this.internalHeight }}
       >
         <div ref="content" class="nav-box__content">
