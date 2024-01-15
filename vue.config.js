@@ -16,5 +16,8 @@ module.exports = {
     const version = process.env.VERSION || require('./package.json').version
     const banner = `@laomao800/vue-nav-box v${version}`
     config.plugins.push(new webpack.BannerPlugin(banner))
+    config.externals = {
+      'core-js': 'core-js'
+    }
   }
 }
